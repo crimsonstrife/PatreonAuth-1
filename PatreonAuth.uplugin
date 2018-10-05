@@ -1,0 +1,34 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0.0",
+  "FriendlyName": "Patreon Auth",
+  "Description": "This plugin let's your players sign into Patreon from within your game to check if they are subscribers and or followers.",
+  "Category": "fivefingergames",
+  "CreatedBy": "fivefingergames",
+  "CreatedByURL": "https://fivefingergames.com",
+  "DocsURL": "https://github.com/mrbandler/PatreonAuth/wiki",
+  "MarketplaceURL": "",
+  "SupportURL": "support@fivefingergames.com",
+  "EngineVersion": "4.20.0",
+  "CanContainContent": true,
+  "IsBetaVersion": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "PatreonAuth",
+      "Type": "Runtime",
+      "LoadingPhase": "Default",
+      "WhitelistPlatforms": [
+        "Win64",
+        "Win32"
+      ]
+    }
+  ],
+  "Plugins": [
+    {
+      "Name": "WebBrowserWidget",
+      "Enabled": true
+    }
+  ]
+}
