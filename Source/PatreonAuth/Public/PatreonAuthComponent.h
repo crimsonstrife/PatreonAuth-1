@@ -188,7 +188,7 @@ private:
 	EPatreonRequest m_PatreonRequest = EPatreonRequest::None;
 
     /** The last endpoint a request was send to. */
-    EEndpoint m_LastEndpoint = EEndpoint::None;
+	EPatreonEndpoint m_LastEndpoint = EPatreonEndpoint::None;
 
     /** The authenticated Twitch user from the Authentication process. */
     FPatreonIdentity m_PatreonIdentity;

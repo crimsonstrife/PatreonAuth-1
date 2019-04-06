@@ -114,26 +114,26 @@ void UPatreonAuthComponent::OnResponseReceived(FHttpRequestPtr Request, FHttpRes
         // Based on the last endpoint we send a request to we handle the response.
         switch(m_LastEndpoint)
         {
-		case EEndpoint::Campaign:
-			m_LastEndpoint = EEndpoint::None;
+		case EPatreonEndpoint::Campaign:
+			m_LastEndpoint = EPatreonEndpoint::None;
 			//HandleGetCampaignResponse(Request, Response);
 
 			break;
 
-		case EEndpoint::Token:
-			m_LastEndpoint = EEndpoint::None;
+		case EPatreonEndpoint::Token:
+			m_LastEndpoint = EPatreonEndpoint::None;
 			HandleGetAccessTokenResponse(Request, Response);
 			
 			break;
 
-		case EEndpoint::Identity:
-			m_LastEndpoint = EEndpoint::None;
+		case EPatreonEndpoint::Identity:
+			m_LastEndpoint = EPatreonEndpoint::None;
 			//HandleGetIdentityResponse(Request, Response);
 			
 			break;
 
-		case EEndpoint::Members:
-			m_LastEndpoint = EEndpoint::None;
+		case EPatreonEndpoint::Members:
+			m_LastEndpoint = EPatreonEndpoint::None;
 			//HandleGetMemberResponse(Request, Response);
 			
 			break;
@@ -149,17 +149,17 @@ void UPatreonAuthComponent::OnResponseReceived(FHttpRequestPtr Request, FHttpRes
 
         switch(m_LastEndpoint)
         {
-            case EEndpoint::Token:
+            case EPatreonEndpoint::Token:
                 LogError(m_LastErrors);
                 //OnUserFollowingChannel.Broadcast(false, m_TwitchFollow);
                 break;
 
-            case EEndpoint::Identity:
+            case EPatreonEndpoint::Identity:
                 LogError(m_LastErrors);
                 //OnUserSubscribedToChannel.Broadcast(false, m_TwitchSubscription);
                 break;
 
-            case EEndpoint::Members:
+            case EPatreonEndpoint::Members:
                 LogError(m_LastErrors);
                 //OnUserSubscribedToChannel.Broadcast(false, m_TwitchSubscription);
                 break;
@@ -174,14 +174,14 @@ void UPatreonAuthComponent::OnResponseReceived(FHttpRequestPtr Request, FHttpRes
 void UPatreonAuthComponent::ExecuteGetAccessTokenRequest(const FString& SingleUseCode)
 {
         // Create a request with the correct endpoint.
-        TSharedRef<IHttpRequest> request = UPatreonApi::CreateHttpRequest("", UPatreonApi::TOKEN_ENDPOINT, EHttpVerb::Get, true);
+        TSharedRef<IHttpRequest> request = UPatreonApi::CreateHttpRequest("", UPatreonApi::TOKEN_ENDPOINT, EPatreonHttpVerb::Get, true);
         FString payload = UPatreonApi::CreateTokenRequestPayload(SingleUseCode, ClientId, ClientSecret);
         request->SetContentAsString(payload);
         
         request->OnProcessRequestComplete().BindUObject(this, &UPatreonAuthComponent::OnResponseReceived);
     
         // Set the last endpoint so that the response handler knows what to do.
-        m_LastEndpoint = EEndpoint::Token;
+        m_LastEndpoint = EPatreonEndpoint::Token;
     
         // Send the request.
         request->ProcessRequest();

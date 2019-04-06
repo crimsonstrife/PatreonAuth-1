@@ -13,7 +13,7 @@
 * @brief   Values that represent HTTP verbs.
 */
 UENUM()
-enum class EHttpVerb : uint8
+enum class EPatreonHttpVerb : uint8
 {
     Get,
     Post,
@@ -28,7 +28,7 @@ enum class EHttpVerb : uint8
 * @brief   Values that represent Patreon API endpoints.
 */
 UENUM()
-enum class EEndpoint : uint8
+enum class EPatreonEndpoint : uint8
 {
     None,
 	Campaign,
@@ -122,7 +122,7 @@ public:
      *
      * @return	The HTTP verb string.
      */
-    static FString GetHttpVerbStr(EHttpVerb Verb);
+    static FString GetHttpVerbStr(EPatreonHttpVerb Verb);
 
     /**
      * @fn	static bool UPatreonApi::IsResponseValid(FHttpResponsePtr Response, bool bWasSuccessful);
@@ -151,7 +151,7 @@ public:
      *
      * @return	The new HTTP request.
      */
-    static TSharedRef<IHttpRequest> CreateHttpRequest(const FString& AccessToken, const FString& Endpoint, EHttpVerb Verb, const bool bFormDataUrlEncoded);
+    static TSharedRef<IHttpRequest> CreateHttpRequest(const FString& AccessToken, const FString& Endpoint, EPatreonHttpVerb Verb, const bool bFormDataUrlEncoded);
 
     /**
      * @fn  static FString UPatreonApi::CreateTokenRequestPayload(const FString& SingleUseCode, const FString& ClientId, const FString& ClientSecret);
