@@ -12,7 +12,7 @@ const FString UPatreonApi::IDENTITY_ENDPOINT = TEXT("/identity");
 const FString UPatreonApi::MEMBERS_ENDPOINT = TEXT("/members/{0}?fields%5Bmember%5D=full_name,patron_status,is_follower,lifetime_support_cents,currently_entitled_amount_cents,will_pay_amount_cents&fields%5Btier%5D=amount_cents,user_limit,remaining,description,requires_shipping,created_at,url,patron_count,post_count,discord_role_ids,title,image_url,edited_at,published,published_at,unpublished_at&include=currently_entitled_tiers");
 
 
-TSharedRef<IHttpRequest> UPatreonApi::CreateHttpRequest(const FString& AccessToken, const FString& Endpoint, EHttpVerb Verb, const bool bFormDataUrlEncoded)
+TSharedRef<IHttpRequest> UPatreonApi::CreateHttpRequest(const FString& AccessToken, const FString& Endpoint, EPatreonHttpVerb Verb, const bool bFormDataUrlEncoded)
 {
     FHttpModule* http = &FHttpModule::Get();
 
@@ -101,7 +101,7 @@ FString UPatreonApi::GetIdentityEndpointWithInclude(EEndpointInclude EndpointInc
 	return result;
 }
 
-FString UPatreonApi::GetHttpVerbStr(EHttpVerb Verb)
+FString UPatreonApi::GetHttpVerbStr(EPatreonHttpVerb Verb)
 {
     // Init the result.
     FString result = "";
@@ -109,15 +109,15 @@ FString UPatreonApi::GetHttpVerbStr(EHttpVerb Verb)
     // Set the result variable based on the given enum value.
     switch(Verb)
     {
-        case EHttpVerb::Get: result = "GET";
+        case EPatreonHttpVerb::Get: result = "GET";
             break;
-        case EHttpVerb::Post: result = "POST";
+        case EPatreonHttpVerb::Post: result = "POST";
             break;
-        case EHttpVerb::Put: result = "PUT";
+        case EPatreonHttpVerb::Put: result = "PUT";
             break;
-        case EHttpVerb::Patch: result = "PATCH";
+        case EPatreonHttpVerb::Patch: result = "PATCH";
             break;
-        case EHttpVerb::Delete: result = "DELETE";
+        case EPatreonHttpVerb::Delete: result = "DELETE";
             break;
         default:
             break;
